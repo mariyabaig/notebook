@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
 import NoteState from "./context/notes/NoteState";
+import { Alert } from "./components/Alert";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <NoteState>
         <Router>
           <Navbar />
+          <Alert message="This is amazing React course" />
           <div className="container">
             <Switch>
               <Route exact path="/about">
