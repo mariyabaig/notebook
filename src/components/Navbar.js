@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 const Navbar = () => {
+  let history = useHistory();
+  const handleLogout=()=>{
+    
+    localStorage.removeItem('token')
+    history.push('/login')
+  }
   let location = useLocation();
   useEffect(() => {
     console.log(location.pathname)
   
   }, [location])
   
-  const handleLogout=()=>{
-    let history = useHistory();
-    localStorage.removeItem('token')
-    history.push('/login')
-  }
+ 
   return (
     <>
     

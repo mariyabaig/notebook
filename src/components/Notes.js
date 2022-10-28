@@ -2,12 +2,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import noteContext from "../context/notes/noteContext"
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
+import { useHistory } from 'react-router-dom';
 
 const Notes = () => {
     const context = useContext(noteContext);
     const { notes, getNotes ,editNote} = context;
+    let history = useHistory();
     useEffect(() => {
-        getNotes()
+        if (localStorage.getItem('token')) {
+            getNotes()
+        } else {
+            history.push("/login")
+        }
+        
         // eslint-disable-next-line
     }, [])
     const ref = useRef(null)
@@ -70,7 +77,7 @@ const Notes = () => {
 
             <div className="row my-3">
                 <h2>Your Notes</h2>
-                <div className="container">
+                <div className="container" >
                 {notes.length===0 && "No notes to display"}</div> 
                 {notes.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} />
