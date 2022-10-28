@@ -39,7 +39,7 @@ const Login = () => {
             value={credentials.email}
             onChange={onChange}
             className="form-control"
-            id="email"
+            i d="email"
             name="email"
             aria-describedby="emailHelp"
             placeholder="Enter email"
