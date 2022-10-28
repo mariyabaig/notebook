@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let history = useHistory();
   const handleLogin = async (e) => {
@@ -20,16 +20,20 @@ const Login = () => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
-      localStorage.setItem("token", json.authtoken );
+      localStorage.setItem('token', json.authtoken );
       history.push("/");
+      props.showAlert("Logged in successfully","sucess");
+    
     } else {
-      alert("Invalid creds");
+      props.showAlert("Invalid credentials","danger");
     }
   };
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
+    <>
+    <h2>Log In </h2>
     <div className="container mx-3">
       <form onSubmit={handleLogin}>
         <div className="form-group">
@@ -39,7 +43,7 @@ const Login = () => {
             value={credentials.email}
             onChange={onChange}
             className="form-control"
-            i d="email"
+            id="email"
             name="email"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -66,6 +70,7 @@ const Login = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 
